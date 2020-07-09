@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BarrieJobsApp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BarrieJobsApp.Controllers
 {
+    [Authorize(Roles="Administrator,Customer")]
     public class JobPostingsController : Controller
     {
         private readonly BarrieJobsContext _context;
