@@ -1,10 +1,11 @@
 ﻿using System;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace BarrieJobsApp.Models
 {
-    public partial class BarrieJobsContext : DbContext
+    public partial class BarrieJobsContext : IdentityDbContext<ApplicationUser,ApplicationRole,string>
     {
         public BarrieJobsContext()
         {
@@ -22,13 +23,14 @@ namespace BarrieJobsApp.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source=(local);Initial Catalog=BarrieJobs;Integrated Security=True");
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+//                optionsBuilder.UseSqlServer("Data Source=(local);Initial Catalog=BarrieJobs;Integrated Security=True");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Applicants>(entity =>
             {
                 entity.Property(e => e.ApplicantId).ValueGeneratedNever();

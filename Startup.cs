@@ -31,8 +31,14 @@ namespace BarrieJobsApp
             services.AddDbContext<BarrieJobsContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<BarrieJobsContext>();
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
+                .AddDefaultUI()
+                .AddRoles<ApplicationRole>()
+                .AddRoleManager<RoleManager<ApplicationRole>>()
+                .AddEntityFrameworkStores<BarrieJobsContext>()
+                .AddDefaultTokenProviders();
+            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            //    .AddEntityFrameworkStores<BarrieJobsContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
